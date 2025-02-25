@@ -81,7 +81,7 @@ export async function getSpendingData(): Promise<Award[]> {
       amount: item['Award Amount'],
       date: item['Start Date'],
       agency: item['Awarding Agency'],
-      recipient: item['Recipient Name'],
+      recipient: item['Recipient Name'] || 'Unknown Recipient',
       description: item.Description
     }));
   } catch (error) {

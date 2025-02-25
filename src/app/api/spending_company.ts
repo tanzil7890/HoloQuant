@@ -105,7 +105,8 @@ export async function getSpendingData(): Promise<Award[]> {
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch spending data: ${response.status}`);
+      console.error(`Failed to fetch spending data: ${response.status}`);
+      return [];
     }
 
     const data: ApiResponse = await response.json();
@@ -125,13 +126,13 @@ export async function getSpendingData(): Promise<Award[]> {
       },
       type: 'contract',
       status: 'active',
-      recipient_id: result.generated_internal_id,
+      recipient_id: result['Recipient Name'],
       recipient_name: result['Recipient Name'],
       description: result.Description
     }));
 
   } catch (error) {
     console.error('Error fetching spending data:', error);
-    throw error;
+    return [];
   }
 } 

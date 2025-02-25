@@ -1,4 +1,4 @@
-import { Award } from '../../app/api/spending_company';
+import { Award } from '../../app/api/spending';
 import { useMemo } from 'react';
 import ContractDistributionChart from './ContractDistributionChart';
 
@@ -70,7 +70,7 @@ export default function ContractValueAnalysis({
       
       // Group contracts by year and month
       const contractsByYearMonth = companyData.contracts.reduce((acc, contract) => {
-        const date = new Date(contract.date || contract.action_date || contract.award_date || Date.now());
+        const date = new Date(contract.date);
         const year = date.getFullYear();
         const month = date.getMonth();
         const yearMonth = `${year}-${month}`;
@@ -121,7 +121,7 @@ export default function ContractValueAnalysis({
 
     // Calculate monthly trends
     const monthlyData = companyData.contracts.reduce((acc, contract) => {
-      const date = new Date(contract.date || contract.action_date || contract.award_date || Date.now()).toISOString().slice(0, 7);
+      const date = new Date(contract.date).toISOString().slice(0, 7);
       acc[date] = (acc[date] || 0) + contract.amount;
       return acc;
     }, {} as Record<string, number>);
@@ -136,7 +136,7 @@ export default function ContractValueAnalysis({
       
       // Group by year
       companyData.contracts.forEach(contract => {
-        const year = new Date(contract.date || contract.action_date || contract.award_date || Date.now()).getFullYear();
+        const year = new Date(contract.date).getFullYear();
         if (!yearlyData[year]) {
           yearlyData[year] = { total: 0, contractCount: 0 };
         }

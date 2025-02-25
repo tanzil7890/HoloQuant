@@ -1,4 +1,4 @@
-import { Award } from '../../app/api/spending_company';
+import { Award } from '../../app/api/spending';
 
 interface GovContractExposureProps {
   isOpen: boolean;

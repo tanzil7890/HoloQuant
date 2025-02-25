@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Award } from '../../app/api/spending_company';
+import { Award } from '../../app/api/spending';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 interface HistoricalTrendsProps {
@@ -24,14 +24,14 @@ export default function HistoricalTrends({ isOpen, companyData, onToggle }: Hist
     
     // Sort contracts by date
     const sortedContracts = [...companyData.contracts].sort((a, b) => {
-      const dateA = new Date(a.date || a.action_date || a.award_date || '');
-      const dateB = new Date(b.date || b.action_date || b.award_date || '');
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
       return dateA.getTime() - dateB.getTime();
     });
 
     // Group by quarters
     sortedContracts.forEach(contract => {
-      const date = new Date(contract.date || contract.action_date || contract.award_date || '');
+      const date = new Date(contract.date);
       if (isNaN(date.getTime())) return;
 
       const quarter = `${date.getFullYear()} Q${Math.floor(date.getMonth() / 3) + 1}`;

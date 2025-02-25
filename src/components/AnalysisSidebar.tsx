@@ -1,4 +1,4 @@
-import { Award } from '../app/api/spending_company';
+import { Award } from '../app/api/spending';
 import { useState } from 'react';
 import ContractValueAnalysis from './PublicCompanyAnalysis/ContractValueAnalysis';
 import RiskAssessmentMetrics from './PublicCompanyAnalysis/RiskAssessmentMetrics';
